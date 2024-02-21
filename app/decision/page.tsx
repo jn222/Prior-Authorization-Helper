@@ -8,11 +8,12 @@ import DecisionSummary from "@/components/decision-summary"
 const Page: FC = () => {
   return (
     <main className="flex min-h-screen flex-col items-center px-10">
-      <div>
+      <div className="space-y-10">
         <Header
           status={decision.status}
           determination={decision.is_met}
           procedure={decision.procedure_name}
+          path={decision.steps.map((step) => step.key)}
         />
         {decision.steps.map((step) => (
           <Step step={step} key={step.key} />

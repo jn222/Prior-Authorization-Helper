@@ -4,21 +4,40 @@ interface Props {
   status: string
   determination: boolean
   procedure: string
+  path: string[]
 }
 
-const Header: FC<Props> = ({ status, determination, procedure }: Props) => {
+const Header: FC<Props> = ({
+  status,
+  determination,
+  procedure,
+  path
+}: Props) => {
   return (
-    <div>
-      <h1>{procedure}</h1>
-      <div className="flex">
-        <div>
-          <h3>Status</h3>
-          <h2>{status}</h2>
-        </div>
-        <div>
-          <h3>Determination</h3>
-          <h2>{determination ? "Probable Approval" : "Probable Denial"}</h2>
-        </div>
+    <div className="space-y-5">
+      <span className="text-3xl">{procedure}</span>
+      <div className="space-x-5">
+        <span>Status</span>
+        <span className="text-lg">
+          {status.charAt(0).toUpperCase() + status.slice(1)}
+        </span>
+      </div>
+      <div className="space-x-5">
+        <span>Determination</span>
+        <span className="text-lg">
+          {determination ? "Probable Approval" : "Probable Denial"}
+        </span>
+      </div>
+      <div className="space-x-5">
+        <span>Path</span>
+        <span className="text-lg">
+          {path.reduce(
+            (pathString, step) =>
+              Number(step) !== 0 ? pathString.concat(`${step} → `) : pathString,
+            ""
+          )}
+          {determination ? "✅" : "❌"}
+        </span>
       </div>
     </div>
   )

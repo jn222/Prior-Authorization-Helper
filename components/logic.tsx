@@ -8,11 +8,10 @@ interface Props {
 
 const Logic: FC<Props> = ({ logicArr }: Props) => {
   return (
-    <div>
-      {/* TODO: Don't use index */}
-      {logicArr.map((logic, index) => (
-        <div key={index} className="flex">
-          <Checkbox checked={logic.selected} />
+    <div className="space-y-2">
+      {logicArr.map((logic) => (
+        <div key={logic.text} className="flex items-center space-x-2">
+          <Checkbox checked={logic.selected} className="cursor-default" />
           <label>{logic.text}</label>
         </div>
       ))}

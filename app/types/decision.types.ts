@@ -1,4 +1,5 @@
 // TODO: Documentation
+// Base response shape
 export interface Decision {
   case_id: string
   status: string
@@ -41,5 +42,5 @@ export interface Evidence {
   page_number: number
   pdf_id: string
   pdf_name: any
-  event_datetime?: string
+  event_datetime?: string | null
 }

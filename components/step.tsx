@@ -18,6 +18,7 @@ import {
   CollapsibleTrigger
 } from "./ui/collapsible"
 import { CaretDownIcon, CaretUpIcon } from "@radix-ui/react-icons"
+import classNames from "classnames"
 
 interface Props {
   step: Step
@@ -26,10 +27,7 @@ interface Props {
 const Step: FC<Props> = ({ step }: Props) => {
   const [expanded, setExpanded] = useState(false)
   return (
-    <Collapsible
-      open={expanded}
-      onOpenChange={setExpanded}
-    >
+    <Collapsible open={expanded} onOpenChange={setExpanded}>
       <Card>
         <CardHeader>
           <CardTitle>
@@ -40,16 +38,18 @@ const Step: FC<Props> = ({ step }: Props) => {
           <CardDescription>{step.question}</CardDescription>
         </CardHeader>
         <CardContent>
-          <OptionList options={step.options} className="mb-5"/>
+          <OptionList options={step.options} className="mb-5" />
           {!step.is_met && (
-            <span className="text-red-500 text-lg font-bold">
+            <span className="text-red-500 text-lg font-bold mb-5">
               The requirements for this procedure have not been met.
             </span>
           )}
           <div className="justify-center flex">
             <CollapsibleTrigger>
               <>
-                <span>{expanded ? "Less" : "More"} Info</span>
+                <span className="underline">
+                  {expanded ? "Less" : "More"} Info
+                </span>
                 <div className="justify-center flex">
                   {expanded ? (
                     <CaretUpIcon className="size-10" />
@@ -63,14 +63,25 @@ const Step: FC<Props> = ({ step }: Props) => {
 
           <CollapsibleContent className="space-y-10">
             <div className="space-y-5">
+              <span className="font-bold text-lg">
+                This choice was made because...
+              </span>
               {step.reasoning.split("\n\n").map((reason) => (
                 <div key={reason}>
                   <p>{reason}</p>
                 </div>
               ))}
             </div>
-            <EvidenceList evidenceArr={step.evidence} />
-            <Logic logicArr={step.logic} />
+            {!!step.evidence.length && (
+              <EvidenceList evidenceArr={step.evidence} />
+            )}
+            {!!step.logic.length && step.is_met && (
+              <Logic
+                logicArr={step.logic}
+                decision={step.decision}
+                nextStep={step.next_step}
+              />
+            )}
           </CollapsibleContent>
         </CardContent>
       </Card>

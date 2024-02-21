@@ -16,7 +16,7 @@ const DecisionSummary: FC<Props> = ({ approval, summary }: Props) => {
         >
           Likely {approval ? "approval" : "denial"}
         </CardTitle>
-        <CardDescription>{summary}</CardDescription>
+        <CardDescription className="text-md">{summary}</CardDescription>
       </CardHeader>
     </Card>
   )

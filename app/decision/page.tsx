@@ -14,6 +14,7 @@ const Page: FC = () => {
           determination={decision.is_met}
           procedure={decision.procedure_name}
           path={decision.steps.map((step) => step.key)}
+          cptCodes={decision.cpt_codes}
         />
         {decision.steps.map((step) => (
           <Step step={step} key={step.key} />

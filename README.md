@@ -36,15 +36,15 @@ Typical use case: Start at Question 1 and move to subsequent questions, until de
 
 - Use zod for typing and validation
   - NOTE: due to time constraint, did not get to validating API responses
-- Use NextJS with shadcn components for prototyping
-
-## Components
-
-### DeterminationView
-
-Props: determination
-
-Functionality:
-
-- Make API Call
-- Display form and
+- Use NextJS with shadcn components for prototyping.
+- Loose component structure:
+  - Main page
+  - PriorAuthorizationForm
+    - UploadInput
+  - DeterminationView
+    - Header NOTE: make API call in this component
+    - Step NODE: Display reasoning
+      - OptionList
+      - EvidenceList
+      - LogicList
+    - DecisionSummary

@@ -5,16 +5,24 @@ import PriorAuthorizationForm, {
 } from "@/components/prior-authorization-form"
 import { useState } from "react"
 import { z } from "zod"
-import { Decision } from "./types/decision.types"
-import DecisionView from "@/components/decision-view"
+import { Determination } from "./types/determination.types"
+import DeterminationView from "@/components/determination-view"
 
+/**
+ * This page renders the form for uploading records/guidelines. After the Mock API is called,
+ * the determination analysis is displayed.
+ */
 export default function Home() {
-  const [decision, setDecision] = useState<Decision>()
-  const [decisionError, setDecisionError] = useState<string>()
+  const [determination, setDetermination] = useState<Determination>()
+  const [determinationError, setDeterminationError] = useState<string>()
+  const [determinationLoading, setDeterminationLoading] = useState(false)
   const onSubmit = async (
     values: z.infer<typeof PriorAuthorizationFormSchema>
   ) => {
+    setDeterminationError("")
+    setDeterminationLoading(true)
     try {
+      // Write pdf files to server
       const formData = new FormData()
       formData.append("recordFile", values.recordFile)
       formData.append("guidelineFile", values.guidelineFile)
@@ -28,20 +36,38 @@ export default function Home() {
       } else {
         throw new Error("API Error")
       }
-      setDecision(data)
+      setDetermination(data)
     } catch (error) {
       console.error("Error while processing: ", error)
-      setDecisionError("There was an error in processing.")
+      setDeterminationError("There was an error in processing.")
+    } finally {
+      setDeterminationLoading(false)
     }
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between px-10 pb-10">
+      {determination && (
+        <div className="w-full mb-10">
+          <span
+            className="cursor-pointer underline"
+            onClick={() => {
+              setDetermination(undefined)
+            }}
+          >
+            {"<"} Submit New Authorization
+          </span>
+        </div>
+      )}
       <div>
-        {decision ? (
-          <DecisionView decision={decision} />
+        {determination ? (
+          <DeterminationView determination={determination} />
         ) : (
-          <PriorAuthorizationForm onSubmit={onSubmit} error={decisionError} />
+          <PriorAuthorizationForm
+            onSubmit={onSubmit}
+            error={determinationError}
+            loading={determinationLoading}
+          />
         )}
       </div>
     </main>

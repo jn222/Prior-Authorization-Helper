@@ -8,6 +8,9 @@ interface Props {
   cptCodes: string[]
 }
 
+/**
+ * Displays the load status, approval/rejection, procedure name, question path, and considered cpt codes for a prior authorization submission
+ */
 const Header: FC<Props> = ({
   status,
   determination,

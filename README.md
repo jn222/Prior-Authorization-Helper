@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Prior Authorization Copilot
 
-## Getting Started
+This is a mock prior authorization AI copilot to enhance productivity of Utilization Review built in [Next.js](https://nextjs.org/).
 
-First, run the development server:
+## To Start
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then, nagivate to [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Overview
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Helper takes uploaded pdf record and guidelines and generates output (determination).
 
-## Learn More
+Display results from LLM pipeline along with reasoning provided.
 
-To learn more about Next.js, take a look at the following resources:
+Typical use case: Start at Question 1 and move to subsequent questions, until determination of approval.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Requirements
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Display
+  - Steps taken by AI
+  - Evidence for each step
+  - Reasoning used to decide subsequent steps
+  - Determination summary
+  - Clearly highlight if treatment criteria is met
+- Constraints
+  - Use mock stubs to simulate file uploads
+  - Load example response from mock API if demonstrating loading states, otherwise load directly from JSON file
+    record
 
-## Deploy on Vercel
+## Approach
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Use zod for typing and validation
+  - NOTE: due to time constraint, did not get to validating API responses
+- Use NextJS with shadcn components for prototyping
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Components
+
+### DeterminationView
+
+Props: determination
+
+Functionality:
+
+- Make API Call
+- Display form and

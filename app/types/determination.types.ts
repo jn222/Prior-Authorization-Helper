@@ -1,4 +1,4 @@
-export interface Decision {
+export interface Determination {
   case_id: string
   status: string
   procedure_name: string
@@ -17,7 +17,7 @@ export interface Step {
   logic: Logic[]
   logic_string: string
   reasoning: string
-  decision: string
+  determination: string
   next_step: string
   is_met: boolean
   is_final: boolean

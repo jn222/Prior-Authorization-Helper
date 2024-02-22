@@ -1,4 +1,4 @@
-import { Option } from "@/app/types/decision.types"
+import { Option } from "@/app/types/determination.types"
 import { FC, useState } from "react"
 import { Checkbox } from "./ui/checkbox"
 import classNames from "classnames"
@@ -8,6 +8,9 @@ interface Props {
   className?: string
 }
 
+/**
+ * Displays all options for a given step
+ */
 const OptionList: FC<Props> = ({ options, className }: Props) => {
   const [expanded, setExpanded] = useState(false)
   return (

@@ -1,4 +1,4 @@
-import { Logic } from "@/app/types/decision.types"
+import { Logic } from "@/app/types/determination.types"
 import { FC, useState } from "react"
 import { Checkbox } from "./ui/checkbox"
 import {
@@ -8,19 +8,27 @@ import {
 } from "./ui/collapsible"
 
 interface Props {
-  decision: string
+  determination: string
   nextStep: string
   logicArr: Logic[]
 }
 
-const Logic: FC<Props> = ({ logicArr, decision, nextStep }: Props) => {
+/**
+ * Displays the logic for moving to the next step
+ */
+const Logic: FC<Props> = ({ logicArr, determination, nextStep }: Props) => {
   const [expanded, setExpanded] = useState(false)
-  const isPlural = decision.split(",").length > 1
+  const isPlural = determination.split(",").length > 1
   return (
-    <Collapsible open={expanded} onOpenChange={setExpanded} className="space-y-3">
+    <Collapsible
+      open={expanded}
+      onOpenChange={setExpanded}
+      className="space-y-3"
+    >
       <div className="font-bold text-xl">
-        {isPlural ? "Options" : "Option"} {decision} {isPlural ? "are" : "is"}{" "}
-        selected. <u>Therefore, the next step is question {nextStep}</u>
+        {isPlural ? "Options" : "Option"} {determination}{" "}
+        {isPlural ? "are" : "is"} selected.{" "}
+        <u>Therefore, the next step is question {nextStep}</u>
       </div>
       <CollapsibleTrigger className="underline">
         {expanded ? "Hide" : "Show"} why

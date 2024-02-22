@@ -1,6 +1,6 @@
 "use client"
 
-import { Step } from "@/app/types/decision.types"
+import { Step } from "@/app/types/determination.types"
 import { FC, useState } from "react"
 import {
   Card,
@@ -24,6 +24,9 @@ interface Props {
   step: Step
 }
 
+/**
+ * Displays a given step in the overall path of the prior authorization determination
+ */
 const Step: FC<Props> = ({ step }: Props) => {
   const [expanded, setExpanded] = useState(false)
   return (
@@ -78,7 +81,7 @@ const Step: FC<Props> = ({ step }: Props) => {
             {!!step.logic.length && step.is_met && (
               <Logic
                 logicArr={step.logic}
-                decision={step.decision}
+                determination={step.determination}
                 nextStep={step.next_step}
               />
             )}

@@ -21,7 +21,9 @@ import {
   FormMessage
 } from "./ui/form"
 import { Input } from "./ui/input"
+import { ReloadIcon } from "@radix-ui/react-icons"
 
+// Form schema for validation if we want to add more forms
 export const PriorAuthorizationFormSchema = z.object({
   recordFile: z.custom<File>((v) => v instanceof File, {
     message: "PDF is required"
@@ -34,9 +36,17 @@ export const PriorAuthorizationFormSchema = z.object({
 interface Props {
   onSubmit: (values: z.infer<typeof PriorAuthorizationFormSchema>) => void
   error?: string
+  loading?: boolean
 }
 
-const PriorAuthorizationForm: FC<Props> = ({ onSubmit, error }: Props) => {
+/** 
+ * Form for submitting a prior authorization analysis to the copilot. Allows users to upload a guidelines and patient medical record pdf.
+ */
+const PriorAuthorizationForm: FC<Props> = ({
+  onSubmit,
+  error,
+  loading
+}: Props) => {
   const form = useForm<z.infer<typeof PriorAuthorizationFormSchema>>({
     resolver: zodResolver(PriorAuthorizationFormSchema)
   })
@@ -102,8 +112,9 @@ const PriorAuthorizationForm: FC<Props> = ({ onSubmit, error }: Props) => {
             <Button
               type="submit"
               className="w-full"
-              // disabled={!form.formState.isValid}
+              disabled={!form.formState.isValid && !loading}
             >
+              {loading && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />}{" "}
               Submit
             </Button>
             {error && <div className="text-red-500">{error}</div>}

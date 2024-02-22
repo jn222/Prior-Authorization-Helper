@@ -7,9 +7,16 @@ interface Props {
   summary: string
 }
 
-const DecisionSummary: FC<Props> = ({ approval, summary }: Props) => {
+/**
+ * Displays the determination summary for a determination response
+ */
+const DeterminationSummary: FC<Props> = ({ approval, summary }: Props) => {
   return (
-    <Card className={classNames(approval ? "border-green-500 bg-green-50" : "border-red-500 bg-red-50")}>
+    <Card
+      className={classNames(
+        approval ? "border-green-500 bg-green-50" : "border-red-500 bg-red-50"
+      )}
+    >
       <CardHeader>
         <CardTitle
           className={classNames(approval ? "text-green-500" : "text-red-500")}
@@ -21,4 +28,4 @@ const DecisionSummary: FC<Props> = ({ approval, summary }: Props) => {
     </Card>
   )
 }
-export default DecisionSummary
+export default DeterminationSummary

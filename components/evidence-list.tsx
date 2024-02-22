@@ -1,4 +1,4 @@
-import { Evidence } from "@/app/types/decision.types"
+import { Evidence } from "@/app/types/determination.types"
 import { FC, useState } from "react"
 import classNames from "classnames"
 import { ReaderIcon } from "@radix-ui/react-icons"
@@ -10,8 +10,11 @@ import {
 
 interface Props {
   evidenceArr: Evidence[]
-} 
+}
 
+/**
+ * Displays cited evidence for a given step
+ */
 const EvidenceList: FC<Props> = ({ evidenceArr }: Props) => {
   const [expanded, setExpanded] = useState(false)
 
@@ -25,7 +28,8 @@ const EvidenceList: FC<Props> = ({ evidenceArr }: Props) => {
         <ReaderIcon className="size-10" />
         <div>
           <p className="text-lg font-bold">
-            This decision was made based on citations from the medical record.
+            This determination was made based on citations from the medical
+            record.
           </p>
           <CollapsibleTrigger>
             <p className="underline">{expanded ? "Hide" : "Show"} evidence</p>

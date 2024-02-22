@@ -1,5 +1,3 @@
-// TODO: Documentation
-// Base response shape
 export interface Decision {
   case_id: string
   status: string

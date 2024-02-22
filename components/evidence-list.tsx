@@ -10,7 +10,7 @@ import {
 
 interface Props {
   evidenceArr: Evidence[]
-}
+} 
 
 const EvidenceList: FC<Props> = ({ evidenceArr }: Props) => {
   const [expanded, setExpanded] = useState(false)

@@ -16,7 +16,7 @@ const Header: FC<Props> = ({
   cptCodes
 }: Props) => {
   return (
-    <div className="space-y-5">
+    <div className="space-y-2">
       <span className="text-3xl font-bold">{procedure}</span>
       <div className="space-x-5 items-center">
         <span className="text-gray-500">Status:</span>

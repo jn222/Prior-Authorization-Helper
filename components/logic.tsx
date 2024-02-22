@@ -8,7 +8,7 @@ import {
 } from "./ui/collapsible"
 
 interface Props {
-  determination: string
+  decision: string
   nextStep: string
   logicArr: Logic[]
 }
@@ -16,9 +16,9 @@ interface Props {
 /**
  * Displays the logic for moving to the next step
  */
-const Logic: FC<Props> = ({ logicArr, determination, nextStep }: Props) => {
+const Logic: FC<Props> = ({ logicArr, decision, nextStep }: Props) => {
   const [expanded, setExpanded] = useState(false)
-  const isPlural = determination.split(",").length > 1
+  const isPlural = decision.split(",").length > 1
   return (
     <Collapsible
       open={expanded}
@@ -26,9 +26,8 @@ const Logic: FC<Props> = ({ logicArr, determination, nextStep }: Props) => {
       className="space-y-3"
     >
       <div className="font-bold text-xl">
-        {isPlural ? "Options" : "Option"} {determination}{" "}
-        {isPlural ? "are" : "is"} selected.{" "}
-        <u>Therefore, the next step is question {nextStep}</u>
+        {isPlural ? "Options" : "Option"} {decision} {isPlural ? "are" : "is"}{" "}
+        selected. <u>Therefore, the next step is question {nextStep}</u>
       </div>
       <CollapsibleTrigger className="underline">
         {expanded ? "Hide" : "Show"} why

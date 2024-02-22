@@ -18,7 +18,6 @@ import {
   CollapsibleTrigger
 } from "./ui/collapsible"
 import { CaretDownIcon, CaretUpIcon } from "@radix-ui/react-icons"
-import classNames from "classnames"
 
 interface Props {
   step: Step
@@ -81,7 +80,7 @@ const Step: FC<Props> = ({ step }: Props) => {
             {!!step.logic.length && step.is_met && (
               <Logic
                 logicArr={step.logic}
-                determination={step.determination}
+                decision={step.decision}
                 nextStep={step.next_step}
               />
             )}

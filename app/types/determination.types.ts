@@ -17,7 +17,7 @@ export interface Step {
   logic: Logic[]
   logic_string: string
   reasoning: string
-  determination: string
+  decision: string
   next_step: string
   is_met: boolean
   is_final: boolean
